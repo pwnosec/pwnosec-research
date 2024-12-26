@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
-import { BugBounty } from '../types';
 import { Search, Filter, Star, Calendar, User, Tag } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+interface BugBounty {
+  id: string;
+  title: string;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  category: string;
+  author: string;
+  date: string;
+  content: string;
+  rating: number;
+  comments: any[];
+  tags: string[];
+  url: string; // Add URL field for navigation
+}
 
 const BOUNTIES: BugBounty[] = [
   {
@@ -11,7 +25,7 @@ const BOUNTIES: BugBounty[] = [
     author: 'Pwn0sec Research Team',
     date: '2024-03-15',
     content:
-      'CVE-2012–3153 merupakan kerentanan kritis yang ditemukan dalam komponen Oracle Fusion Middleware WebLogic Server. Kerentanan ini memungkinkan penyerang jarak jauh yang tidak terautentikasi untuk mendapatkan akses ke sistem target melalui eksploitasi JMX (Java Management Extensions) pada server WebLogic. Kerentanan ini secara khusus berdampak pada beberapa versi WebLogic Server yang digunakan dalam lingkungan Toyota Company, memberikan potensi bagi pelaku jahat untuk mengambil alih kontrol server dan merusak sistem aplikasi perusahaan.',
+      'CVE-2012–3153 merupakan kerentanan kritis yang ditemukan dalam komponen Oracle Fusion Middleware WebLogic Server...',
     rating: 4.8,
     comments: [],
     tags: [
@@ -20,39 +34,48 @@ const BOUNTIES: BugBounty[] = [
       'Oracle',
       'CVE-2012–3153',
     ],
+    url: 'https://pwn0sec.medium.com/unauthenticated-rce-bug-bounty-poc-private-bug-bounty-program-cve-2020-11798-dbbb626b9fdb',
   },
   {
     id: '2',
-    title: 'Remote Code Execution via File Upload in WordPress Plugin',
-    severity: 'critical',
-    category: 'File Upload',
+    title:
+      'Missing Function Level Access Control in Mozilla formula containsRegular Expression Denial of Service',
+    severity: 'medium',
+    category: 'Regular Expression',
     author: 'Pwn0sec Research Team',
     date: '2024-03-10',
     content:
-      'Eksplorasi mendalam tentang kerentanan eksekusi kode jarak jauh yang ditemukan di plugin WordPress populer melalui fungsionalitas pengunggahan file yang tidak dibatasi. Kerentanan ini memungkinkan penyerang untuk mengunggah dan mengeksekusi file PHP berbahaya.',
+      'Eksplorasi mendalam tentang kerentanan eksekusi kode jarak jauh...',
     rating: 4.5,
     comments: [],
-    tags: ['RCE', 'WordPress', 'File Upload', 'Plugin Security'],
+    tags: [
+      'Improper Access Control',
+      'Regular Expression',
+      'Bug Bounty',
+      'Bedrock',
+    ],
+    url: 'https://hackerone.com/reports/1879548',
   },
   {
     id: '3',
     title:
-      'HTTP Server Path Traversal or Remote Code Execution via CVE-2021–42013',
+      'Server-Side Request Forgery to Internal SMTP Access (Google scholar)',
     severity: 'high',
-    category: 'Authentication',
+    category: 'Server-Side Request Forgery',
     author: 'Pwn0sec Research Team',
-    date: '2024-03-05',
+    date: '2023-11-03',
     content:
-      'Kerentanan penelusuran jalur diperkenalkan karena perubahan kode baru yang ditambahkan untuk normalisasi jalur, yaitu untuk jalur URL untuk menghapus bagian yang tidak diinginkan atau berbahaya dari nama jalur, tetapi tidak cukup untuk mendeteksi teknik yang berbeda dalam mengkodekan karakter penelusuran jalur “titik-titik garis miring (../)” Untuk mencegah serangan penelusuran jalur, fungsi normalisasi yang bertanggung jawab untuk menyelesaikan nilai yang dikodekan URL dari URI yang diminta, menyelesaikan nilai Unicode satu per satu. Oleh karena itu, ketika URL mengkodekan titik kedua sebagai %2e, logika gagal mengenali %2e sebagai titik sehingga tidak mendekodekannya, hal ini mengubah karakter ../ menjadi .%2e/ dan melewati pemeriksaan. Bersama dengan bypass pemeriksaan penelusuran jalur, agar server HTTP Apache menjadi rentan, konfigurasi Server HTTP harus berisi direktori direktori untuk seluruh sistem berkas server sebagai Require all granted atau direktori direktori harus benar-benar hilang dari file konfigurasi.',
+      'Google Scholar Server-Side Request Forgery (SSRF) adalah kerentanan di mana penyerang dapat mengirim permintaan yang terkontrol dan dibuat melalui aplikasi yang rentan. Kita dapat berkomunikasi dengan berbagai layanan yang berjalan pada protokol yang berbeda dengan memanfaatkan skema URI. Membuat server mengeluarkan permintaan bukanlah kerentanan itu sendiri, tetapi menjadi kerentanan ketika Anda dapat membuat permintaan ke hal-hal yang biasanya tidak dapat atau tidak seharusnya Anda akses, seperti jaringan internal atau layanan internal.',
     rating: 4.7,
     comments: [],
     tags: [
-      'Path Traversal',
+      'Server-Side Request Forgery',
       'Remote Code Execution',
-      'Oracle Fusion',
-      'WebLogic Server',
-      'CVE-2021–42013',
+      'SSRF Exploitation',
+      'Google scholar',
+      '0day',
     ],
+    url: 'https://bughunters.google.com/profile/702cda82-b10f-4d6c-b509-65434bd89b15/awards',
   },
   {
     id: '4',
@@ -61,8 +84,7 @@ const BOUNTIES: BugBounty[] = [
     category: 'Access Control',
     author: 'Pwn0sec Research Team',
     date: '2024-02-28',
-    content:
-      'Saat melakukan pengintaian terhadap target kami, kami menemukan sebuah subdomain. Selama proses penemuan konten pada subdomain ini, kami menemukan kesalahan 403 ketika mencoba mengakses file .env. Namun, perlu dicatat bahwa ada beberapa batasan tertentu yang diberlakukan saat mengakses langsung catatan CNAME mereka, misalnya, yang dihosting di bankaltimtara.co.id dan muncul sebagai *.eform.bankaltimtara.co.id. Menariknya, tidak ada batasan seperti itu, sehingga kami berhasil mengakses file .env. Exploiting this Vulnerability Setelah melakukan pengintaian, ditemukan subdomain yang merupakan kerangka kerja backend yang dimaksud adalah laravel. Setelah menemukan subdomain, saya mulai melakukan penemuan konten ke subdomain tersebut dan menemukan bahwa file .env diungkapkan melalui pwnfuzz Sekarang ketika kita membuka jalur .env kita di browser kita dan itu menunjukkan bahwa kita mendapat status 200 file dapat diakses',
+    content: 'Saat melakukan pengintaian terhadap target kami...',
     rating: 4.6,
     comments: [],
     tags: [
@@ -71,6 +93,7 @@ const BOUNTIES: BugBounty[] = [
       'IoT Exploitation',
       'Machine Security',
     ],
+    url: 'https://pwn0sec.medium.com/how-i-takeover-a-machine-bank-used-credentials-database-after-got-laravel-env-file-f8e9e278bcf0',
   },
 ];
 
@@ -85,6 +108,10 @@ export const BugBountyPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSeverity, setSelectedSeverity] = useState<string>('all');
 
+  const handleReadFullReport = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const filteredBounties = BOUNTIES.filter((bounty) => {
     const matchesSearch =
       bounty.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -96,6 +123,7 @@ export const BugBountyPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Header and search sections remain the same */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Bug Bounty Writeups
@@ -107,7 +135,6 @@ export const BugBountyPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Search and Filter Section */}
       <div className="mb-8 flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -135,7 +162,6 @@ export const BugBountyPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Writeups Grid */}
       <div className="grid grid-cols-1 gap-6">
         {filteredBounties.map((bounty) => (
           <div
@@ -183,7 +209,10 @@ export const BugBountyPage: React.FC = () => {
               </div>
 
               <div className="mt-4 flex justify-end">
-                <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+                <button
+                  onClick={() => handleReadFullReport(bounty.url)}
+                  className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                >
                   Read Full Report
                 </button>
               </div>

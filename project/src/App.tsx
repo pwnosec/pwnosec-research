@@ -6,6 +6,7 @@ import { HeroSection } from './components/layout/HeroSection';
 import { FeaturesSection } from './components/home/FeaturesSection';
 import { Investigations } from './pages/Investigations';
 import { BugBountyPage } from './pages/BugBounty';
+import { ProofOfConcepts } from './pages/ProofOfConcepts';
 import { Events } from './pages/Events';
 import { Contact } from './pages/Contact';
 import { Community } from './pages/Community';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/investigations/emerging-ddos-attack-vectors-in-cloud-infrastructure" element={<DDoSAnalysis />} />
           <Route path="/investigations/supply-chain-attack-compromised-npm-packages-analysis" element={<NPMSupplyChainAnalysis />} />
           <Route path="/bug-bounty" element={<BugBountyPage />} />
+          <Route path="/poc" element={<ProofOfConcepts />} />
           <Route path="/community" element={<Community />} />
           <Route path="/events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
