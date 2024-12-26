@@ -1,9 +1,6 @@
+![alt text](https://i.ibb.co.com/kSY3wn9/Dark-Simple-Future-Linked-In-Banner-1.png)
+
 # PwnOsec Research
-
-GitHub: [PwnOsec Research Repository](https://github.com/pwnosec/pwnosec-research)  
-Website: [PwnOsec Research Portal](https://research.pwn0sec.com)  
-
-## Deskripsi
 PwnOsec Research adalah platform penelitian dan inovasi keamanan siber terdepan, didukung oleh PT. PwnOsec Technologies Ltd, sebuah organisasi private yang diakui secara resmi oleh Republik Indonesia. Kami berkomitmen untuk mendukung kemajuan keamanan digital melalui penelitian mendalam, pengembangan solusi inovatif, dan kolaborasi dengan sektor swasta maupun pemerintah.
 
 ## Visi
